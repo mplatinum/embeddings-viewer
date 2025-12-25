@@ -1,0 +1,103 @@
+/* Custom styles for embeddings visualization */
+
+/* SVG touch-action for D3 zoom on mobile */
+svg {
+  touch-action: none;
+}
+
+/* Range slider styling */
+.slider-input {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.slider-input::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #1a3326;
+  border-radius: 4px;
+  border: 1px solid #39ca6f;
+}
+
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #39ca6f;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px;
+  box-shadow: 0 0 4px rgba(57, 202, 111, 0.5);
+}
+
+.slider-input::-moz-range-track {
+  height: 8px;
+  background: #1a3326;
+  border-radius: 4px;
+  border: 1px solid #39ca6f;
+}
+
+.slider-input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #39ca6f;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 4px rgba(57, 202, 111, 0.5);
+}
+
+.slider-input:focus {
+  outline: none;
+}
+
+.slider-input:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 8px rgba(57, 202, 111, 0.8);
+}
+
+.slider-input:focus::-moz-range-thumb {
+  box-shadow: 0 0 8px rgba(57, 202, 111, 0.8);
+}
+
+.d3-grid line {
+  stroke: #2e533e;
+  stroke-opacity: 0.4;
+  shape-rendering: crispEdges;
+}
+
+.d3-grid path {
+  stroke-width: 0;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tooltip styles */
+.tooltip {
+  z-index: 100;
+}
+
+/* Axis styles to prevent label overlap */
+.x-axis-label, .y-axis-label, .x-axis-label-group, .y-axis-label-group {
+  pointer-events: none;
+}
+
+/* Ensure axis tick labels don't overlap with axis labels */
+.x-axis text, .y-axis text {
+  font-size: 11px;
+  fill: #39ca6f;
+}
+
+/* Give tick labels more space to avoid overlap with axis labels */
+.x-axis .tick text {
+  transform: translateY(8px);
+}
+
+.y-axis .tick text {
+  transform: translateX(-8px);
+}
