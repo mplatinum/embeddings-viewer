@@ -174,7 +174,7 @@ function App() {
           </h1>
         </div>
         <p className="text-cyber-gray-800 text-center">
-          Add an embeddings JSON file to visualize in 2D (this is all done in your browser)
+          Add an embeddings JSONL file to visualize in 2D (this is all done in your browser)
         </p>
       </header>
 
