@@ -34,6 +34,18 @@ function App() {
   const [localParams, setLocalParams] = useState<AlgorithmParams>({});
   const hasAutoLoaded = useRef(false);
   const hasAutoRun = useRef(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFileName(file.name);
+    } else {
+      setSelectedFileName(null);
+    }
+    handleFileUpload(e);
+  };
 
   // Update local params when algorithm params change from external source
   useEffect(() => {
@@ -239,13 +251,26 @@ function App() {
                 <label className="block text-sm font-medium mb-2 text-cyber-green-700">
                   Select JSONL file with embeddings:
                 </label>
-                <input
-                  type="file"
-                  accept=".jsonl"
-                  onChange={handleFileUpload}
-                  className="w-full px-4 py-3 bg-cyber-gray-400 border border-cyber-dim rounded-lg focus:ring-2 focus:ring-cyber-accent focus:border-cyber-accent text-cyber-green-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cyber-green-600 file:text-cyber-green-bright hover:file:bg-cyber-green-700"
-                  disabled={loading}
-                />
+                <div className="flex gap-2">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".jsonl"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    disabled={loading}
+                  />
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={loading}
+                    className="px-4 py-2 bg-cyber-green-600 hover:bg-cyber-green-700 text-cyber-green-bright rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium whitespace-nowrap"
+                  >
+                    Choose File
+                  </button>
+                  <div className="flex-1 px-3 py-2 bg-cyber-gray-400 border border-cyber-dim rounded-lg text-cyber-green-700 text-sm truncate flex items-center justify-center">
+                    {selectedFileName || 'No file selected'}
+                  </div>
+                </div>
               </div>
 
               {loading && (
@@ -439,7 +464,7 @@ function App() {
                   <div className="h-full flex flex-col items-center justify-center text-cyber-gray-800">
                     <div className="text-6xl mb-4">📊</div>
                     <p className="text-lg mb-2 text-cyber-green-700">No data to display</p>
-                    <p className="text-sm text-center text-cyber-gray-800">Input a JSON file with embeddings to visualize</p>
+                    <p className="text-sm text-center text-cyber-gray-800">Input a JSONL file and click Run Algorithm</p>
                   </div>
                 ) : (
                   <svg
