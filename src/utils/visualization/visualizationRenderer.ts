@@ -56,6 +56,16 @@ export interface VisualizationResult {
   height: number;
 }
 
+const colors = {
+  accent: '#f9c74f',
+  accentBright: '#ffd166',
+  glow: '#7be3cc',
+  tooltipBg: 'rgba(8, 12, 24, 0.95)',
+  tooltipText: '#dce8f7',
+  gridStroke: '#233b5a',
+  axisBg: 'rgba(11, 20, 38, 0.9)',
+};
+
 /**
  * Sets up D3 visualization with zoom, points, axes, grid, and tooltips.
  * Returns a cleanup function to remove the visualization and current dimensions.
@@ -139,12 +149,12 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
   const tooltipRect = tooltip.append('rect')
     .attr('rx', 4)
     .attr('ry', 4)
-    .style('fill', 'rgba(15, 20, 18, 0.95)')
-    .style('stroke', '#22cc66')
+    .style('fill', colors.tooltipBg)
+    .style('stroke', colors.accent)
     .style('stroke-width', 1);
 
   const tooltipText = tooltip.append('text')
-    .style('fill', '#5ae885')
+    .style('fill', colors.tooltipText)
     .style('font-size', '12px')
     .style('font-family', 'monospace');
 
@@ -390,7 +400,7 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
     .attr('y', 0)
     .attr('width', width - margin.left - margin.right)
     .attr('height', 30)
-    .attr('fill', 'rgba(10, 18, 16, 0.85)')
+    .attr('fill', colors.axisBg)
     .attr('stroke', 'none')
     .style('pointer-events', 'none');
 
@@ -407,7 +417,7 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
     .attr('y', 0)
     .attr('width', 75) // enough to cover tick labels
     .attr('height', height)
-    .attr('fill', 'rgba(10, 18, 16, 0.85)') // semi-transparent cyber-black
+    .attr('fill', colors.axisBg) // semi-transparent background matching theme
     .attr('stroke', 'none')
     .style('pointer-events', 'none');
 
@@ -449,18 +459,18 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
   // Add points with better visual distinction to container (zoomable)
   const pointsGroup = container.append('g').attr('class', 'points-group');
 
-  // Create a futuristic green color scale for points with more distinction
+  // Create a color scale with alternating teal and amber tones for clearer contrast
   const colorScale = d3.scaleSequential()
     .domain([0, points.length - 1])
     .interpolator(d3.interpolateRgbBasis([
-      '#0a1f14', // Very dark green
-      '#1a4a32', // Dark green
-      '#22cc66', // Bright accent green
-      '#5ae885', // Glow green
-      '#6fff96', // Bright green
-      '#44dd88', // Bright accent
-      '#22cc66', // Back to accent
-      '#1a4a32', // Dark green
+      '#0b1426', // Deep navy
+      '#233b5a', // Steel blue
+      '#47a18f', // Soft teal
+      '#f9c74f', // Amber accent
+      '#7be3cc', // Glow teal
+      '#ffd166', // Bright amber
+      '#2d6a5c', // Mossy teal
+      '#0d1521', // Return to midnight base
     ]));
 
   // Calculate initial radius and stroke width based on current zoom transform
@@ -492,7 +502,7 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
         const adjustedHoverStrokeWidth = baseHoverStrokeWidth / currentTransformRef.current.k;
         d3.select(event.currentTarget)
           .attr('r', adjustedHoverRadius)
-          .attr('stroke', '#44dd88')
+          .attr('stroke', colors.accentBright)
           .attr('stroke-width', adjustedHoverStrokeWidth);
 
         // Show tooltip - get coordinates relative to SVG root
@@ -713,7 +723,7 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
         // Highlight the clicked point
         d3.select(event.currentTarget)
           .attr('r', adjustedActiveRadius)
-          .attr('stroke', '#22cc66') // Bright green for active point
+          .attr('stroke', colors.accent) // Accent highlight for active point
           .attr('stroke-width', adjustedActiveStrokeWidth);
 
         // Show tooltip for active point using the helper function
@@ -750,7 +760,7 @@ export const setupVisualization = (config: VisualizationConfig): VisualizationRe
     container.selectAll('.points-group circle')
       .filter((d: unknown) => (d as Point2D).index === activePoint.index)
       .attr('r', adjustedActiveRadius)
-      .attr('stroke', '#22cc66')
+      .attr('stroke', colors.accent)
       .attr('stroke-width', adjustedActiveStrokeWidth);
 
     // Show tooltip for active point

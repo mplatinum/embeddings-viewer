@@ -6,8 +6,8 @@
   font-weight: 400;
 
   color-scheme: dark;
-  color: #39ca6f;
-  background-color: #0a0a0a;
+  color: #dce8f7;
+  background-color: #05070d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,20 +17,20 @@
 
 a {
   font-weight: 500;
-  color: #22cc66;
+  color: #f9c74f;
   text-decoration: inherit;
 }
 a:hover {
-  color: #5ae885;
+  color: #ffd166;
 }
 
 /* Futuristic green glow effect */
 body {
-  background: linear-gradient(135deg, #0a0a0a 0%, #0d1210 50%, #0a0a0a 100%);
+  background: linear-gradient(135deg, #05070d 0%, #0b1426 45%, #07101c 100%);
 }
 
 h1 {
-  text-shadow: 0 0 10px rgba(34, 204, 102, 0.3);
+  text-shadow: 0 0 10px rgba(249, 199, 79, 0.25);
 }
 
 button {
@@ -40,19 +40,19 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #16201c;
-  color: #5ae885;
+  background-color: #182a40;
+  color: #f9c74f;
   cursor: pointer;
   transition: all 0.25s;
 }
 button:hover {
-  background-color: #1a2923;
-  border-color: #22cc66;
-  box-shadow: 0 0 15px rgba(34, 204, 102, 0.2);
+  background-color: #1f324d;
+  border-color: #f9c74f;
+  box-shadow: 0 0 15px rgba(95, 198, 178, 0.3);
 }
 button:focus,
 button:focus-visible {
-  outline: 2px solid #22cc66;
+  outline: 2px solid #f9c74f;
   outline-offset: 2px;
 }
 
@@ -63,14 +63,14 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f1412;
+  background: #0d1521;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2e533e;
+  background: #233b5a;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #22cc66;
+  background: #f9c74f;
 }
